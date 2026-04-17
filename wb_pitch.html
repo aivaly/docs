@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WB & Russ — Оценка компетенций менеджеров</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #5a8a4a;
+    --green-light: #7aaa62;
+    --green-bg: #f0f5ee;
+    --green-mid: #d4e8cc;
+    --ink: #111110;
+    --muted: #6b6b68;
+    --light: #f7f7f5;
+    --border: #e2e2de;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Onest', sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+  .collab-identity {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .collab-brand {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .collab-name {
+    font-size: .875rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .collab-x {
+    font-size: .8rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin: 0 .1rem;
+  }
+  .logo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  .nav-links { display: none; }
+
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    align-items: center;
+    padding: 6rem 4rem;
+    gap: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-left {}
+  .hero-tag {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .accent { color: var(--green); }
+  .hero-body {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-stat-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-stat-card.green { background: var(--green-bg); border-color: var(--green-mid); }
+  .hero-stat-num {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: -.03em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .hero-stat-label {
+    font-size: .85rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* SECTION WRAPPER */
+  section {
+    padding: 5rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-kicker {
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    max-width: 640px;
+  }
+  .section-lead {
+    font-size: .95rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* SCOPE */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .scope-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .scope-card-header {
+    padding: .75rem 1.25rem;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .scope-card-header.blue { background: #eef3fa; color: #1a3060; }
+  .scope-card-header.amber { background: #faf4e6; color: #6b4810; }
+  .scope-card-body { padding: 1.25rem; }
+  .scope-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: .88rem;
+    color: var(--muted);
+    padding: .4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .scope-row:last-child { border-bottom: none; }
+  .scope-row strong { color: var(--ink); font-weight: 500; }
+
+  /* DISCIPLINES TABLE */
+  .disc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+  }
+  .disc-table th {
+    text-align: left;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: .6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .disc-table td {
+    padding: .8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .disc-table tr:last-child td { border-bottom: none; }
+  .disc-table td:first-child { font-weight: 500; }
+  .disc-table .num { text-align: right; font-weight: 600; color: var(--green); white-space: nowrap; }
+  .disc-table td.muted { color: var(--muted); font-size: .82rem; }
+  .disc-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    font-size: .7rem;
+    font-weight: 600;
+    margin-right: .4rem;
+    flex-shrink: 0;
+  }
+  .d1,.d2 { background: #eef3fa; color: #1a3060; }
+  .d3,.d4 { background: #faf4e6; color: #6b4810; }
+  .d5,.d6 { background: var(--green-bg); color: #2a5a1a; }
+  .d7 { background: #f3eefa; color: #3a1a6a; }
+
+  /* MISALIGNMENT */
+  .misalign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .misalign-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+  .misalign-tag {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .75rem;
+  }
+  .misalign-pct {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -.04em;
+    line-height: 1;
+    margin-bottom: .75rem;
+  }
+  .misalign-body { font-size: .83rem; color: var(--muted); line-height: 1.55; }
+  .hint-box {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: .78rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .hint-box strong { color: var(--ink); font-weight: 500; }
+
+  /* LEVERS */
+  .lever-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .lever-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 2rem;
+    padding: 1.75rem 2rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+  }
+  .lever-item:last-child { border-bottom: none; }
+  .lever-item:hover { background: var(--light); }
+  .lever-num-tag {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .35rem;
+  }
+  .lever-title { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+  .lever-body { font-size: .85rem; color: var(--muted); line-height: 1.65; max-width: 560px; }
+  .lever-saving {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .lever-amount {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    color: var(--green);
+  }
+  .lever-period { font-size: .75rem; color: var(--muted); margin-top: .15rem; }
+
+  /* TOTALS */
+  .total-block {
+    background: var(--green-bg);
+    border: 1px solid var(--green-mid);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  .total-label { font-size: 1rem; font-weight: 600; color: var(--green); }
+  .total-sub { font-size: .83rem; color: var(--green); opacity: .7; margin-top: .3rem; }
+  .total-val {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: -.03em;
+    text-align: right;
+  }
+  .conserv-hint {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: .78rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-top: 1rem;
+  }
+  .conserv-hint strong { color: var(--ink); font-weight: 500; }
+
+  /* LONG TERM */
+  .longterm-box {
+    background: var(--white);
+    border: 1.5px solid var(--green);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin-top: 1rem;
+  }
+  .lt-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  .lt-title { font-size: 1.1rem; font-weight: 600; color: var(--green); }
+  .lt-subtitle { font-size: .8rem; color: var(--green); opacity: .7; margin-top: .2rem; }
+  .lt-val { font-size: 2rem; font-weight: 600; color: var(--green); text-align: right; }
+  .lt-val-sub { font-size: .75rem; color: var(--green); opacity: .7; text-align: right; margin-top: .15rem; }
+  .lt-body { font-size: .875rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .lt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .75rem;
+  }
+  .lt-item {
+    background: var(--green-bg);
+    border-radius: 8px;
+    padding: .875rem 1rem;
+  }
+  .lt-item-label { font-size: .7rem; color: var(--green); font-weight: 500; margin-bottom: .25rem; letter-spacing: .04em; }
+  .lt-item-val { font-size: 1.1rem; font-weight: 600; color: #1a4a10; }
+
+  /* TIMELINE */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: var(--green-mid);
+    z-index: 0;
+  }
+  .tl-step { text-align: center; position: relative; padding-top: .25rem; }
+  .tl-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    margin: 0 auto 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-dot.hollow {
+    background: var(--white);
+    border: 2px solid var(--green);
+  }
+  .tl-title { font-size: .9rem; font-weight: 600; margin-bottom: .3rem; }
+  .tl-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; padding: 0 .5rem; }
+  .tl-time { font-size: .75rem; font-weight: 600; color: var(--green); margin-top: .5rem; }
+
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .service-table th {
+    text-align: left;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: .75rem 1.25rem;
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+  }
+  .service-table td {
+    padding: .9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .service-table tr:last-child td { border-bottom: none; }
+  .tag {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 600;
+    padding: .2rem .6rem;
+    border-radius: 100px;
+  }
+  .tag-green { background: var(--green-bg); color: #1a5010; }
+  .tag-red { background: #faeaea; color: #7a1a1a; }
+
+  /* PRICING */
+  .pricing-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; }
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.25rem 1.75rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    gap: 2rem;
+  }
+  .pricing-row:last-child { border-bottom: none; background: var(--light); }
+  .pricing-name { font-size: .95rem; font-weight: 500; margin-bottom: .25rem; }
+  .pricing-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .pricing-amount {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .pricing-row:last-child .pricing-amount { font-size: 1.4rem; }
+  .pricing-row:last-child .pricing-name { font-size: 1rem; font-weight: 600; }
+
+  /* BENCHMARK */
+  .benchmark-box {
+    background: #eef3fa;
+    border: 1px solid #c5d8f0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+  }
+  .benchmark-label { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #1a3060; margin-bottom: 1.25rem; }
+  .benchmark-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .bm-item {
+    background: var(--white);
+    border: 1px solid #c5d8f0;
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .bm-item-label { font-size: .72rem; color: #3a5a90; margin-bottom: .3rem; line-height: 1.3; }
+  .bm-item-val { font-size: 1.3rem; font-weight: 600; color: #1a3060; letter-spacing: -.01em; }
+  .bm-item-sub { font-size: .72rem; color: #5a7ab0; margin-top: .2rem; }
+
+  /* PITCH QUOTE */
+  .pitch-quote {
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    margin-top: 2rem;
+  }
+  .pq-label { font-size: .68rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1rem; }
+  .pq-text { font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,.85); }
+  .pq-text strong { color: var(--white); font-weight: 600; }
+
+  /* SOURCES */
+  .sources {
+    font-size: .75rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 3rem 4rem;
+    border-top: 1px solid var(--border);
+    background: var(--light);
+  }
+  .sources strong { color: var(--ink); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 500; }
+  .footer-note { font-size: .8rem; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; min-height: auto; }
+    section { padding: 3rem 1.5rem; }
+    .scope-grid, .misalign-grid, .tier-grid { grid-template-columns: 1fr; }
+    .lt-grid { grid-template-columns: 1fr 1fr; }
+    .benchmark-grid { grid-template-columns: 1fr 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .timeline::before { display: none; }
+    .total-block, .lt-header { grid-template-columns: 1fr; gap: .75rem; }
+    .total-val, .lt-val { text-align: left; }
+    .lever-item { grid-template-columns: 1fr; gap: .5rem; }
+    .lever-saving { text-align: left; }
+    .pricing-row { grid-template-columns: 1fr; gap: .25rem; }
+    .pricing-amount { text-align: left; }
+    .sources, footer { padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: .75rem; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="collab-identity">
+    <div class="collab-brand">
+      <div class="logo-dot"></div>
+      <span class="collab-name">кейслабс</span>
+    </div>
+    <span class="collab-x">×</span>
+    <div class="collab-brand">
+      <svg viewBox="0 0 1000 1000" width="20" height="20" style="flex-shrink:0;display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+	.st0{fill:url(#wb_grad_1);}
+	.st1{fill:#FFFFFF;}
+</style>
+<g>
+	<g>
+		
+			<linearGradient id="wb_grad_1" gradientUnits="userSpaceOnUse" x1="-164.3022" y1="-27446.4688" x2="18807.3594" y2="4172.9189" gradientTransform="matrix(3.234501e-02 0 0 -3.234501e-02 203.3076 115.5872)">
+			<stop  offset="0" style="stop-color:#6F01FB"/>
+			<stop  offset="1" style="stop-color:#FF49D7"/>
+		</linearGradient>
+		<path class="st0" d="M0,469.5C0,305.1,0,223,32,160.2C60.1,105,105,60.1,160.2,32C223,0,305.1,0,469.5,0h61.1
+			C694.9,0,777,0,839.8,32C895,60.1,939.9,105,968,160.2c32,62.8,32,144.9,32,309.3v61.1c0,164.3,0,246.5-32,309.3
+			C939.9,895,895,939.9,839.8,968c-62.8,32-144.9,32-309.3,32h-61.1c-164.3,0-246.5,0-309.3-32C105,939.9,60.1,895,32,839.8
+			C0,777,0,694.9,0,530.5V469.5z"/>
+	</g>
+	<path class="st1" d="M761,352.9c-35.8,0-68.2,10.8-95.8,29.4V213h-76.4v312c0,94.9,77.2,171.3,171.7,171.3
+		c94.5,0,172.6-75.9,172.6-172.2C933.2,427.9,856.8,352.9,761,352.9z M414.3,547.1L344.4,365h-53.5l-70.3,182.1L150.2,365H66.9
+		l123,320.2h53.5l73.8-190.7l74.2,190.7h53.5L567.5,365h-82.9L414.3,547.1z M760.6,620c-51.8,0-95.4-41.4-95.4-95.4
+		c0-54,41-94.9,95.8-94.9c54.8,0,95.8,42.7,95.8,94.9C856.8,576.9,813.2,620,760.6,620z"/>
+</g>
+</svg>
+      <span class="collab-name">WB &amp; Russ</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Коммерческое предложение · WB & Russ</div>
+    <h1 class="hero-title">
+      Оценка компетенций<br>
+      <span class="accent">1 700 менеджеров</span><br>
+      за 8 недель
+    </h1>
+    <p class="hero-body">
+      Асинхронная автоматизированная оценка топ- и мидл-менеджмента по 7 направлениям.
+      Оценка выявляет расхождения между компетенциями, текущим грейдом и компенсацией, 
+		позволяет оценить экономический эффект и создать системные инструменты оптимизации ФОТ.
+    </p>
+
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-card green">
+      <div class="hero-stat-num">₽841М</div>
+      <div class="hero-stat-label">прямая ежегодная экономия<br>на фонде оплаты труда</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-num" style="color:var(--ink);">1 700</div>
+      <div class="hero-stat-label">менеджеров —<br>300 топ + 1 400 мидл</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-num" style="color:var(--ink);">×21</div>
+      <div class="hero-stat-label">ROI проекта. Стоимость сервиса —<br>окупается за 1 месяц</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="section-kicker">Масштаб аудита</div>
+  <h2 class="section-title">Фокус на менеджменте: 5% сотрудников управляют 100% грейдинга</h2>
+  <p class="section-lead">
+    По данным McKinsey и Ассоциации менеджеров, 70–80% дисбаланса в оплате труда формируется сверху вниз: 
+    менеджеры утверждают грейды, согласуют повышения и создают ролевую инфляцию. 
+    Скорректировав 1 700 человек, WB & Russ получает эффект на всю организации.
+  </p>
+
+  <div class="scope-grid">
+    <div class="scope-card">
+      <div class="scope-card-header blue">Tier 1 — топ-менеджмент · 300 человек</div>
+      <div class="scope-card-body">
+        <div class="scope-row"><span>CEO−2 (VP, директора направлений)</span><strong>~300</strong></div>
+        <div class="scope-row"><span>Средний годовой gross</span><strong>₽18 000 000</strong></div>
+        <div class="scope-row"><span>Суммарный ФОТ тира</span><strong>₽5,4 млрд</strong></div>
+        <div class="scope-row"><span>Источник данных</span><strong>Ассоциация Менеджеров РФ 2024</strong></div>
+      </div>
+    </div>
+    <div class="scope-card">
+      <div class="scope-card-header amber">Tier 2 — мидл-менеджмент · 1 400 человек</div>
+      <div class="scope-card-body">
+        <div class="scope-row"><span>Тимлиды и руководители отделов (5+ в команде)</span><strong>1 400</strong></div>
+        <div class="scope-row"><span>Охват дисциплин</span><strong>7 направлений</strong></div>
+        <div class="scope-row"><span>Средний годовой gross</span><strong>₽4 800 000</strong></div>
+        <div class="scope-row"><span>Суммарный ФОТ тира</span><strong>₽6,72 млрд</strong></div>
+        <div class="scope-row"><span>Источник данных</span><strong>Dream Job / Habr Career 2024–26</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-kicker" style="margin-top:2.5rem;">7 дисциплин оценки</div>
+  <table class="disc-table">
+    <thead>
+      <tr>
+        <th>Направление</th>
+        <th>Ключевые кластеры компетенций</th>
+        <th>Риск дисбаланса</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="disc-num d1">1</span>Технологии и разработка</td>
+        <td class="muted">Техническая глубина, архитектурные решения, масштабирование команд</td>
+        <td class="muted">Зарплатная инфляция пандемийного периода; легаси-лиды без переаттестации</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d2">2</span>Продукт и аналитика</td>
+        <td class="muted">Data literacy, владение роадмапом, управление стейкхолдерами</td>
+        <td class="muted">Роль создана в период гипероста без карьерной лестницы</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d3">3</span>Логистика и операции</td>
+        <td class="muted">Проектирование процессов, владение KPI, кросс-функциональная координация</td>
+        <td class="muted">Быстрое расширение складской сети 2021–23 = инфляция должностей</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d4">4</span>Коммерция и маркетплейс</td>
+        <td class="muted">Переговоры, категорийная стратегия, P&L literacy</td>
+        <td class="muted">Слияние коммерческих команд WB и Russ — разные грейдовые системы</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d5">5</span>Маркетинг и медиа</td>
+        <td class="muted">Медиапланирование, бренд-стратегия, ROI-измерение</td>
+        <td class="muted">Russ-команда пришла с иными бенчмарками оплаты</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d6">6</span>Финансы, юридический блок и риски</td>
+        <td class="muted">Финансовое моделирование, регуляторные риски, контроли</td>
+        <td class="muted">Приобретение WB Банка создало грейдовые дублирования</td>
+      </tr>
+      <tr>
+        <td><span class="disc-num d7">7</span>Люди, HR и оргразвитие</td>
+        <td class="muted">Talent strategy, people analytics, управление изменениями</td>
+        <td class="muted">Функция выросла в 4 раза за 3 года; часть менеджеров без стратегических навыков</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- MISALIGNMENT -->
+<section>
+  <div class="section-kicker">Диагностика дисбаланса</div>
+  <h2 class="section-title">Оценка выявляет три типа экономически значимых расхождений</h2>
+
+  <div class="misalign-grid">
+    <div class="misalign-card">
+      <div class="misalign-tag" style="color:#1a3060;">Переоплата относительно уровня компетенций</div>
+      <div class="misalign-pct" style="color:#1a3060;">22%</div>
+      <div class="misalign-body">~374 менеджера, чья компенсация превышает потолок грейда, подтверждённый оценкой. 
+      Концентрация — топы после слияния и легаси-руководители. 
+      Средняя переплата: +20% к рыночному бенчмарку.</div>
+    </div>
+    <div class="misalign-card">
+      <div class="misalign-tag" style="color:#6b4810;">Критический разрыв: высокая оплата при низком результате оценки</div>
+      <div class="misalign-pct" style="color:#c8780a;">9%</div>
+      <div class="misalign-body">~153 менеджера: компенсация в верхнем квартиле, 
+      результат оценки — в нижних двух квинтилях. 
+      Это приоритетная группа для пересмотра роли, грейда или дальнейших кадровых решений. Средняя переплата: ₽2,1 млн/год.</div>
+    </div>
+    <div class="misalign-card">
+      <div class="misalign-tag" style="color:#1a5010;">Риск оттока: недооценённые сильные менеджеры</div>
+      <div class="misalign-pct" style="color:var(--green);">14%</div>
+      <div class="misalign-body">~238 менеджеров ниже рыночной ставки. 
+      Это риск потери: прежде всего в функциях с высокой конкуренцией за управленческий талант. 
+      Аудит даёт HRD список для проактивных удержаний.</div>
+    </div>
+  </div>
+
+  <div class="hint-box">
+    <strong>Откуда эти цифры:</strong> Показатели 22% / 9% / 14% основаны на трёх источниках: 
+    (1) российские HR-исследования по быстрорастущим tech-компаниям 2021–2024 — 18–25% менеджеров выходят за потолок грейда в течение 24 месяцев гипероста; 
+    (2) специфика WB — компания удвоила GMV три года подряд и прошла крупное слияние в 2024-м; 
+    (3) исследование Ассоциации Менеджеров России 2024: у 60%+ крупных российских компаний нет формальных грейдов на уровне менеджмента. 
+    Цифра 9% по критическому разрыву — <strong>консервативная</strong>: отраслевой бенчмарк 10–15%.
+  </div>
+</section>
+
+<!-- SAVINGS -->
+<section id="savings">
+  <div class="section-kicker">Экономический эффект</div>
+  <h2 class="section-title">Три рычага прямой экономии</h2>
+  <p class="section-lead">
+    Расчёт консервативный — выбраны нижние значения по каждому рычагу. 
+    При более агрессивном сценарии реализации прямой эффект увеличивается до ₽1,05-1,2 млрд в год.
+  </p>
+
+  <div class="lever-list">
+    <div class="lever-item">
+      <div>
+        <div class="lever-num-tag">Рычаг 1</div>
+        <div class="lever-title">Коррекция переоплаченных менеджеров (грейдинг + заморозка)</div>
+        <div class="lever-body">
+          374 переоплаченных × средний gross ₽7,13 млн × 20% выше потолка = пул переплаты ₽533 млн. 
+          Коэффициент возврата 65% (контракты менеджеров жёстче, коррекция занимает 12–18 мес. через заморозку и пересмотр грейдов).
+        </div>
+      </div>
+      <div class="lever-saving">
+        <div class="lever-amount">₽347 млн</div>
+        <div class="lever-period">в год</div>
+      </div>
+    </div>
+    <div class="lever-item">
+      <div>
+        <div class="lever-num-tag">Рычаг 2</div>
+        <div class="lever-title">Замена менеджеров с критическим разрывом между компенсацией и результатом оценки</div>
+        <div class="lever-body">
+          153 менеджера с критическим разрывом × 50% коэффициент принятия решений = 77 выходов. 
+          Gross 77 × ₽7,13 млн = ₽549 млн валовая экономия. 
+          Минус выходные пособия 2,5 мес = ₽91 млн. Минус бэкфилл (40% позиций на 25% ниже грейдом) = ₽85 млн.
+          Год 1: ₽282 млн (пособия авансом), с года 2: ₽373 млн/год.
+        </div>
+      </div>
+      <div class="lever-saving">
+        <div class="lever-amount">₽373 млн</div>
+        <div class="lever-period">в год (со 2-го года)</div>
+      </div>
+    </div>
+    <div class="lever-item">
+      <div>
+        <div class="lever-num-tag">Рычаг 3</div>
+        <div class="lever-title">Дисциплина повышений и бонусов на основе результатов оценки</div>
+        <div class="lever-body">
+          Бюджет повышений ≈ 4% от ₽12,12 млрд = ₽485 млн. 
+          Без грейдовой системы ~25% уходит на повышения выше потолка или без обоснования результатами. 
+          ₽121 млн/год экономится после того, как HR в-хаузе выстроит систему на основе нашего отчёта.
+        </div>
+      </div>
+      <div class="lever-saving">
+        <div class="lever-amount">₽121 млн</div>
+        <div class="lever-period">в год</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="total-block">
+    <div>
+      <div class="total-label">Суммарная прямая экономия (Р1 + Р2 + Р3)</div>
+      <div class="total-sub">Только по менеджерскому периметру · Эффект первого года за вычетом выходных пособий: ₽749 млн.</div>
+    </div>
+    <div class="total-val">₽841 млн</div>
+  </div>
+
+  <div class="conserv-hint">
+    <strong>Консервативность оценки.</strong> Три допущения намеренно занижены: 
+    (1) критический разрыв — 9% vs отраслевой бенчмарк 10–15%; 
+    (2) коэффициент принятия решений по выходам — 50% vs 65–70% у агрессивных компаний; 
+    (3) коэффициент возврата по рычагу 1 — 65% vs 80%+. 
+    При верхних значениях прямая экономия составит <strong>₽1,05–1,2 млрд/год</strong>.
+  </div>
+</section>
+
+<!-- LONG TERM -->
+<section>
+  <div class="section-kicker">Долгосрочный эффект</div>
+  <h2 class="section-title">Устойчевая система - предотвращает накопление нового дисбаланса</h2>
+  <p class="section-lead">
+    Первый эффект проекта составляет ₽841 млн в год. Долгосрочная ценность состоит 
+	  в переходе к устойчивой логике решений по грейдам, компенсации и продвижениям 
+	  на основе фактически применяемых навыков. Это создаёт накопительный эффект 
+	  и снижает риск повторного накопления грейдовых и компенсационных искажений.
+  </p>
+
+  <div class="longterm-box">
+    <div class="lt-header">
+      <div>
+        <div class="lt-title">Рычаг 4 — Каскадный эффект на уровень IC-сотрудников</div>
+        <div class="lt-subtitle">In-house · Дополнительных затрат нет</div>
+      </div>
+      <div>
+        <div class="lt-val">₽222 млн+</div>
+        <div class="lt-val-sub">в год, структурно</div>
+      </div>
+    </div>
+    <div class="lt-body">
+      Каждый скорректированный менеджер управляет в среднем 19 IC-сотрудниками. 
+      Когда 374 переоплаченных ререйтингуются и 77 менеджеров выходят — грейдовая инфляция их команд теряет внутреннего «спонсора». 
+      HR-команда WB & Russ может применить ту же грейдовую логику к подчинённым без привлечения внешней экспертизы.
+      <br><br>
+      Консервативная оценка: 10% прямых подчинённых (~2 600 IC) приводятся в рамки грейда. 
+      При среднем gross ₽2,26 млн × 15% переплата × 60% возврат = <strong>₽222 млн/год дополнительно.</strong>
+      <br><br>
+      <strong>Главный долгосрочный эффект</strong> состоит в переходе к единой грейдовой логике, в которой найм, повышения и продвижения привязаны к <strong>подтверждённым навыкам.</strong> Это снижает риск повторного накопления грейдовых и компенсационных искажений.
+    </div>
+    <div class="lt-grid">
+      <div class="lt-item">
+        <div class="lt-item-label">Прямая экономия год 1</div>
+        <div class="lt-item-val">₽749 млн</div>
+      </div>
+      <div class="lt-item">
+        <div class="lt-item-label">Год 1 с каскадом</div>
+        <div class="lt-item-val">₽971 млн</div>
+      </div>
+      <div class="lt-item">
+        <div class="lt-item-label">Год 2+ устойчивый</div>
+        <div class="lt-item-val">₽1,06 млрд</div>
+      </div>
+      <div class="lt-item">
+        <div class="lt-item-label">Накопленный эффект 5 лет</div>
+        <div class="lt-item-val">~₽5 млрд</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="section-kicker">Состав проекта и сроки</div>
+  <h2 class="section-title">Полностью автоматизированная оценка: 3 часа на участника</h2>
+  <p class="section-lead">
+    Асинхронный формат — менеджеры проходят оценку в удобное время. 
+    WB & Russ сам устанавливает дедлайн: все 1 700 можно собрать за 2 дня или дать больше времени.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-dot"></div>
+      <div class="tl-title">Разработка платформы</div>
+      <div class="tl-desc">Компетентностные модели по 7 трекам, онлайн-платформа, автоскоринг</div>
+      <div class="tl-time">5 недель</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-dot hollow"></div>
+      <div class="tl-title">Окно оценки</div>
+      <div class="tl-desc">1 700 менеджеров · ~3 ч каждый · асинхронно, в удобное время</div>
+      <div class="tl-time">дедлайн WB & Russ</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-dot hollow"></div>
+      <div class="tl-title">Автоматический скоринг</div>
+      <div class="tl-desc">Результаты генерируются автоматически после последней сессии</div>
+      <div class="tl-time">в течение часов</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-dot hollow"></div>
+      <div class="tl-title">Gap-отчёт</div>
+      <div class="tl-desc">Анализ массива данных, предложение вариантов по распределения сотрудников по грейдам, сегменты для оптимизации разных типов.</div>
+      <div class="tl-time">1–2 недели</div>
+    </div>
+  </div>
+
+  <table class="service-table">
+    <thead>
+      <tr>
+        <th>Этап</th>
+        <th>Входит в сервис?</th>
+        <th>Что получает WB & Russ</th>
+        <th>Срок</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Грейдовая архитектура</td>
+        <td><span class="tag tag-red">In-house</span></td>
+        <td style="color:var(--muted);font-size:.83rem;">HR WB строит грейдовые полосы, используя наш отчёт как исходные данные</td>
+        <td style="color:var(--muted);font-size:.83rem;">—</td>
+      </tr>
+      <tr>
+        <td><strong>Компетентностная модель + платформа</strong></td>
+        <td><span class="tag tag-green">Включено</span></td>
+        <td style="font-size:.83rem;">7 треков × 2 уровня. Полностью автоматизированная асинхронная оценка. ~3 ч на участника.</td>
+        <td style="font-size:.83rem;">5 нед.</td>
+      </tr>
+      <tr>
+        <td><strong>Доставка оценки и автоскоринг</strong></td>
+        <td><span class="tag tag-green">Включено</span></td>
+        <td style="font-size:.83rem;">1 700 менеджеров оценено. Скоры генерируются автоматически в течение часов после завершения.</td>
+        <td style="font-size:.83rem;">Дедлайн WB</td>
+      </tr>
+      <tr>
+        <td><strong>Gap-отчёт + план действий</strong></td>
+        <td><span class="tag tag-green">Включено</span></td>
+        <td style="font-size:.83rem;">Тепловая карта скор vs. грейд. Приоритизированные списки для CFO и HRD. Расчёт экономии. Юридически корректная последовательность действий.</td>
+        <td style="font-size:.83rem;">1–2 нед.</td>
+      </tr>
+      <tr>
+        <td>Правила повышений и бонусов</td>
+        <td><span class="tag tag-red">In-house</span></td>
+        <td style="color:var(--muted);font-size:.83rem;">HR строит merit-матрицу на основе gap-отчёта и грейдовой архитектуры</td>
+        <td style="color:var(--muted);font-size:.83rem;">—</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-kicker">Стоимость и ROI</div>
+  <h2 class="section-title">₽40 млн за сервис, ₽841 млн экономии в год</h2>
+  <p class="section-lead">Фиксированная цена. Без переменных. IP компетентностной модели и контент кейс-ассессментов остаётся у WB & Russ.</p>
+
+  <div class="pricing-list">
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-name">Разработка компетентностной модели · 7 треков</div>
+        <div class="pricing-desc">₽2 млн за трек × 7 направлений. Единоразово; модель остаётся в собственности WB & Russ и переиспользуется в будущих циклах.</div>
+      </div>
+      <div class="pricing-amount">₽14 млн</div>
+    </div>
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-name">Доставка оценки · 1 700 менеджеров</div>
+        <div class="pricing-desc">Разработка платформы (5 нед.), хостинг, движок автоскоринга, логистика оценки всех участников.</div>
+      </div>
+      <div class="pricing-amount">₽23 млн</div>
+    </div>
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-name">Анализ данных + gap-отчёт + план действий</div>
+        <div class="pricing-desc">Аналитика, тепловые карты, нарративы по дисциплинам, презентация для CFO/HRD, юридически безопасная последовательность действий.</div>
+      </div>
+      <div class="pricing-amount">₽3 млн</div>
+    </div>
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-name">Итого · фиксированная цена</div>
+      </div>
+      <div class="pricing-amount">₽40 млн</div>
+    </div>
+  </div>
+
+  <div class="benchmark-box">
+    <div class="benchmark-label">Что значит ₽40 млн при масштабе WB & Russ</div>
+    <div class="benchmark-grid">
+      <div class="bm-item">
+        <div class="bm-item-label">ROI на вложение</div>
+        <div class="bm-item-val">21×</div>
+        <div class="bm-item-sub">Прямая экономия год 1 ÷ стоимость сервиса</div>
+      </div>
+      <div class="bm-item">
+        <div class="bm-item-label">Период окупаемости</div>
+        <div class="bm-item-val">~20 дней</div>
+        <div class="bm-item-sub">С момента первых коррекций</div>
+      </div>
+      <div class="bm-item">
+        <div class="bm-item-label">Стоимость оценки одного менеджера</div>
+        <div class="bm-item-val">₽23 500</div>
+        <div class="bm-item-sub">При среднем годовом gross ₽7,1 млн</div>
+      </div>
+      <div class="bm-item">
+        <div class="bm-item-label">Стоимость проекта от экономии</div>
+        <div class="bm-item-val">5,3%</div>
+        <div class="bm-item-sub">94,7% возврата остаётся у компании</div>
+      </div>
+      <div class="bm-item">
+        <div class="bm-item-label">Накопленная экономия 5 лет</div>
+        <div class="bm-item-val">~₽5 млрд</div>
+        <div class="bm-item-sub">При разовой инвестиции ₽40 млн</div>
+      </div>
+      <div class="bm-item">
+        <div class="bm-item-label">Устойчивый эффект со 2-го года</div>
+        <div class="bm-item-val">₽1,06 млрд</div>
+        <div class="bm-item-sub">Превышает отметку ₽1 млрд начиная со 2-го года</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch-quote">
+    <div class="pq-label">ключевой тезис</div>
+    <div class="pq-text">
+      WB & Russ управляет <strong>₽12 млрд</strong> менеджерского ФОТ без системной привязки грейдов и компенсации к подтверждённым навыкам. 
+		 Оценка <strong>1 700</strong> менеджеров в полностью автоматизированном формате даёт объективную основу для выявления расхождений 
+		между <strong>компетенциями, грейдом и оплатой.</strong> Результат проекта - от <strong>₽841 млн</strong> прямой экономии в год 
+		при стоимости сервиса ₽40 млн. Инвестиция окупается в течение <strong>1 месяца</strong> после запуска корректирующих действий, 
+			а устойчивый эффект со второго года превышает <strong>₽1 млрд в год.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources">
+  <strong>Источники данных:</strong> Численность 32 000 официальных сотрудников WB (oborot.ru, 2023); соотношение IC/менеджер 19:1 — стандарт крупного tech; 1 700 менеджеров = 5,3% от официального штата. Компенсация топ-менеджеров: Ассоциация Менеджеров России 2024 (годовой доход топов «в большинстве случаев не превышает ₽20 млн»); productstar.ru 2025 (CEO крупных московских компаний ₽1,5–3 млн/мес). Компенсация мидл-менеджеров: Habr Career вакансии WB & Russ 2025–26 (₽234–316 тыс./мес. для middle/senior); Dream Job WB (тимлид до ₽700 тыс./мес.); Levels.fyi WB медиана IT-специалист ₽1,2 млн/год. Ставки дисбаланса: HR-исследования быстрорастущих российских tech-компаний 2021–2024; Ассоциация Менеджеров России 2024. Все цифры — оценочные для целей питча; данные HRIS WB & Russ заменят допущения фактическими значениями.
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot"></div>
+    кейслабс
+  </div>
+  <div class="footer-note">Коммерческое предложение · WB & Russ</div>
+</footer>
+
+</body>
+</html>
